@@ -34,16 +34,16 @@ typedef struct
 
 int initArcade(Arcade list[], int len);
 int Arcade_loadArcade(Arcade* pList, Salon pListaSalon[], int* idSalon);
-int modifyArcadeById(Arcade list[], int len, int id, Arcade buffer[]);
+int modifyArcadeById(Arcade list[], int len, int id);
 int removeArcadeById(Arcade list[], int len, int id);
 int removeArcadeByIdSalon(Arcade list[], int len, int id);
 int findArcadeById(Arcade list[], int len, int id);
 int findArcadeByIdSalon(Arcade list[], int len, int id);
 int printArcade(Arcade list[], int len);
-int Arcade_altaForzada(Arcade* pList, int len,int indice, char nacionalidad[], int tipo, int jugadores, int fichas,char juego[], int *idSalon);
+int Arcade_altaForzada(Arcade* pList, int len, char nacionalidad[], int tipo, int jugadores, int fichas,char juego[], int idSalon);
 int generadorArcadeID(void);
 int buscarArcadeLibre(Arcade list[], int len);
-int listaJuegos(Arcade list[], int len, Arcade buffer[]);
+int listaJuegos(Arcade list[], int len);
 int printJuegos(Arcade list[], int len);
 
 

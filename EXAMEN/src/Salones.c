@@ -11,6 +11,13 @@
 #include "utn_biblioteca.h"
 #include "Salones.h"
 
+/** \brief 	Inicializa todas las posiciones del array con un flag isEmpty=0 para indicar que las posiciones están libres.
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 
 int initSalon(Salon list[], int len)
 {
@@ -29,6 +36,13 @@ int initSalon(Salon list[], int len)
 }
 
 //****************************
+
+/** \brief 	Pide los datos para dar de alta un Salon
+ *
+ * \param 	Salon pList[] es un puntero al array de salon.
+ * \param	int len recibe la longitud del array de salones.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 int Salon_loadSalon(Salon pList[], int* idSalon)
 {
@@ -92,6 +106,16 @@ int Salon_loadSalon(Salon pList[], int* idSalon)
 }
 
 //****************************
+
+
+/** \brief 	Pide los datos para modificar un Salon por id
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * \param	int id recibe el id del salon a modificar.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 
 int modifySalonById(Salon list[], int len, int id)
 {
@@ -160,6 +184,14 @@ int modifySalonById(Salon list[], int len, int id)
 
 //****************************
 
+/** \brief 	Pide los datos para eliminar un Salon
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * \param	int id recibe el id del salon a eliminar.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 int removeSalonById(Salon list[],int len,int id)
 {
 	int retorno = -1;
@@ -216,6 +248,14 @@ int removeSalonById(Salon list[],int len,int id)
 
 //****************************
 
+/** \brief 	Busca salon por ID
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * \param	int id recibe el id del salones a buscar.
+ * return	Retorna el indice
+ */
+
 int findSalonById(Salon list[], int len, int id)
 {
 	int i;
@@ -237,6 +277,13 @@ int findSalonById(Salon list[], int len, int id)
 }
 
 //****************************
+
+/** \brief 	Imprime lista de Salones
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 int printSalon(Salon list[], int len)
 {
@@ -278,6 +325,14 @@ int printSalon(Salon list[], int len)
 }
 
 //****************************
+
+/** \brief 	Imprime Salon por ID
+ *
+ * \param 	Salon list[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * \param	int id recibe el ID.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 int printSalonById(Salon list[], int len, int id)
 {
@@ -321,6 +376,13 @@ int printSalonById(Salon list[], int len, int id)
 
 //****************************
 
+/** \brief 	Inicializa lista de Salones
+ *
+ * \param 	Pide todos los parametros que necesita un array de salones.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
+
 int Salon_altaForzada(Salon* pList, int len,int indice, int tipo, float precio, char nombre[], char direccion[])
 {
 	int retorno = -1;
@@ -342,6 +404,13 @@ int Salon_altaForzada(Salon* pList, int len,int indice, int tipo, float precio, 
 
 //****************************
 
+/** \brief 	busca lugar libre en array Salones
+ *
+ * \param 	Salon list es un punter al array de salones
+ * \param	len es la longitud del array
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 
 int buscarSalonLibre(Salon list[], int len)
 {
@@ -362,6 +431,9 @@ int buscarSalonLibre(Salon list[], int len)
 	return indice;
 }
 
+/** \brief 	Genera un ID consecutivo para array Salones
+ *
+ */
 
 int generadorSalonID(void)
 {

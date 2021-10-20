@@ -22,5 +22,7 @@ int listarArcadesSalon(Salon list[], int len, int id, Arcade listaArcades[]);
 int salonMasArcades(Arcade list[], int len, Salon listaSalones[]);
 int cuantosArcades(Arcade list[], int lenA);
 int maximoPesos(Arcade list[], int lenA, Salon listaSalon[]);
+int salonCompleto(Arcade list[], int len, Salon listaSalones[]);
+int promedioArcadeSalon(Arcade list[], int lenA, Salon listaSalon[], int lenS);
 
 #endif /* INFORMES_H_ */

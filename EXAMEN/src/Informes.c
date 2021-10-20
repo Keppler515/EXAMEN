@@ -291,3 +291,84 @@ int cuantosArcades(Arcade list[], int lenA)
 	printf("\n%s SE ENCUENTRA EN %d ARCADES.\n\n",juego,contador);
 	return retorno;
 }
+
+//******************************************
+
+int salonCompleto(Arcade list[], int len, Salon listaSalones[])
+{
+	int i;
+	int j;
+	int retorno = -1;
+	int contadorA = 0;
+	int idSalonCompleto;
+
+	if(list!=NULL && len>0 && listaSalones!=NULL)
+	{
+	for(i=0;i<len;i++)
+	{
+		if(list[i].isEmpty==1)
+		{
+			contadorA=1;
+
+			for(j=1;j<len;j++)
+			{
+				if(list[i].idSalon==list[j].idSalon)
+				{
+					contadorA++;
+				}
+
+			}
+			if(list[i].jugadores>2 && contadorA>8)
+			{
+				idSalonCompleto = list[i].idSalon;
+				printSalonById(listaSalones, len, idSalonCompleto);
+				break;
+			}
+		}
+	}
+	}
+	return retorno;
+}
+
+
+//******************************************
+
+int promedioArcadeSalon(Arcade list[], int lenA, Salon listaSalon[], int lenS)
+{
+	int i;
+	int retorno = -1;
+	float contadorA = 0;
+	float contadorS = 0;
+	float promedio;
+
+	if(list!=NULL && lenA>0 && listaSalon!=NULL && lenS>0)
+	{
+	for(i=0;i<lenA;i++)
+	{
+		if(list[i].isEmpty==1)
+		{
+			contadorA++;
+		}
+	}
+
+	for(i=0;i<lenS;i++)
+	{
+		if(listaSalon[i].isEmpty==1)
+		{
+			contadorS++;
+		}
+	}
+	}
+	promedio =  contadorA/contadorS;
+
+	printf("EL PROMEDIO DE ARCADES POR SALON ES: %.2f\n\n",promedio);
+
+	return retorno;
+}
+
+
+
+
+
+
+

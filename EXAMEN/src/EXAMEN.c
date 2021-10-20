@@ -31,7 +31,7 @@ int main(void)
 
 	Salon	listaSalones[CANT_SALON];
 	Arcade 	listaArcades[CANT_ARCADE];
-	Arcade 	bufferJuegos[CANT_ARCADE];
+	//Arcade 	bufferJuegos[CANT_ARCADE];
 
 	int opcion;
 	int idAux;
@@ -42,17 +42,23 @@ int main(void)
 	int flagJuegos = 0;
 
 	initSalon(listaSalones, CANT_SALON);
-	initArcade(bufferJuegos, CANT_ARCADE);
-/*
+	initArcade(listaArcades, CANT_ARCADE);
+
 	Salon_altaForzada(listaSalones, CANT_SALON, 0, 2, 0, "Sacoa", "Lavalle");
 	Salon_altaForzada(listaSalones, CANT_SALON, 4, 2, 0, "PlayCenter", "Avell");
 	Salon_altaForzada(listaSalones, CANT_SALON, 7, 2, 0, "CotoJuegos", "Lanus");
+	printf("\n");
+	flagAlta = 1;
 
 
-	Arcade_altaForzada(listaArcades, CANT_ARCADE, 4, "EEUU", SALON, 2, 100, "Street Fighter 2",&idSalonAux);
-	Arcade_altaForzada(listaArcades, CANT_ARCADE, 7, "EEUU", SHOPPING,2 , 200, "Mortal Kombat 2",&idSalonAux);
-	Arcade_altaForzada(listaArcades, CANT_ARCADE, 9, "EEUU", SALON, 4, 150, "Sunset Riders",&idSalonAux);
-*/
+	Arcade_altaForzada(listaArcades, CANT_ARCADE,"EEUU", 1, 2, 100, "StreetFighter",1);
+	Arcade_altaForzada(listaArcades, CANT_ARCADE,"EEUU", 2, 2, 200, "MortalKombat",2);
+	Arcade_altaForzada(listaArcades, CANT_ARCADE,"EEUU", 2, 2, 200, "MortalKombat",2);
+	Arcade_altaForzada(listaArcades, CANT_ARCADE,"EEUU", 2, 4, 150, "SunsetRiders",3);
+	printf("\n");
+	flagArcade = 1;
+	flagJuegos = 1;
+
 while(1)
 {
 	if(utn_getNumero(&opcion, 	"1. Alta de salon\n"
@@ -63,7 +69,7 @@ while(1)
 								"6. Eliminar arcade\n"
 								"7. Imprimir arcades\n"
 								"8. Imprimir juegos\n"
-								"9. Informes\n", "ERROR1\n")==0)
+								"9. Informes\n\n", "ERROR1\n")==0)
 	{
 		switch(opcion)
 		{
@@ -118,7 +124,7 @@ while(1)
 					{
 						flagArcade = 1;
 						flagJuegos = 1;
-						listaJuegos(listaArcades, CANT_ARCADE, bufferJuegos);
+
 						puts("\nARCADE INGRESADO OK\n");
 
 					}
@@ -135,7 +141,7 @@ while(1)
 					printArcade(listaArcades,CANT_ARCADE);
 					if(utn_getNumero(&idAux, "INGRESE ID A MODIFICAR: ", "ERROR\n")==0)
 					{
-						if(modifyArcadeById(listaArcades, CANT_ARCADE, idAux, bufferJuegos)==0)
+						if(modifyArcadeById(listaArcades, CANT_ARCADE, idAux)==0)
 						{
 							puts("DATOS MODIFICADOS EXITOSAMENTE\n");
 						}
@@ -187,7 +193,7 @@ while(1)
 			case 8:
 				if(flagJuegos == 1)
 				{
-					printJuegos(bufferJuegos, CANT_ARCADE);
+					listaJuegos(listaArcades, CANT_ARCADE);
 				}
 				else
 				{
@@ -202,7 +208,9 @@ while(1)
 													"D) Listar todos los arcades de un salon determinado ingresando su ID. Informar nombre y tipo de salon, listar todods los arcades con sus datos junto con el nombre del juego que lo compone.\n"
 													"E) Imprimir el salon con mas cantidad de arcades, indicando todos los datos del salon y la cantidad de arcades que posee.\n"
 													"F) Ingresar el ID de un salon y ver el valor en pesos de una ficha e imprimir el monto maximo en pesos que puede recaudar el salon (sumar cantidad de fichas maximo de cada arcade del salon y multiplicarla por el valor en pesos ingresado).\n"
-													"G) Ingresar el nombre de un juego e imprimir cuantos arcades lo contienen.\n", "ERROR\n");
+													"G) Ingresar el nombre de un juego e imprimir cuantos arcades lo contienen.\n"
+													"H) Un salón se encuentra equipado por completo si posee al menos 8 arcades de mas de 2 jugadores. Listar los salones que cumplan con este mínimo de requisito.\n"
+													"I) Imprimir el promedio de arcades por salón. (Cantidad de arcades totales / Cantidad de salones totales).\n", "ERROR\n");
 				switch(informeAux)
 				{
 				case 'A':
@@ -237,6 +245,14 @@ while(1)
 
 				case 'G':
 					cuantosArcades(listaArcades, CANT_ARCADE);
+				break;
+
+				case 'H':
+					salonCompleto(listaArcades, CANT_ARCADE, listaSalones);
+				break;
+
+				case 'I':
+					promedioArcadeSalon(listaArcades, CANT_ARCADE, listaSalones, CANT_SALON);
 				break;
 				}
 

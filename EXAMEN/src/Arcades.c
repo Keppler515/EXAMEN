@@ -16,6 +16,13 @@
 #define CANT_ARCADE	1000
 #define CANT_SALON	100
 
+/** \brief 	Inicializa todas las posiciones del array con un flag isEmpty=0 para indicar que las posiciones están libres.
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 int initArcade(Arcade list[], int len)
 {
 	int retorno = -1;
@@ -33,6 +40,14 @@ int initArcade(Arcade list[], int len)
 }
 
 //****************************
+
+/** \brief 	Pide los datos para dar de alta un Arcade
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param 	pListaSalon[] es un puntero al array de salones.
+ * \param	int len recibe la longitud del array de salones.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 int Arcade_loadArcade(Arcade pList[], Salon pListaSalon[], int* idSalon)
 {
@@ -95,7 +110,15 @@ int Arcade_loadArcade(Arcade pList[], Salon pListaSalon[], int* idSalon)
 
 //****************************
 
-int modifyArcadeById(Arcade list[], int len, int id, Arcade buffer[])
+/** \brief 	Pide los datos para modificar un Arcade
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * \param	int id recibe el id del arcade a modificar.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
+int modifyArcadeById(Arcade list[], int len, int id)
 {
 	int jugadoresAux;
 	char nombreJuegoAux[CHAR_LEN];
@@ -106,9 +129,9 @@ int modifyArcadeById(Arcade list[], int len, int id, Arcade buffer[])
 	char tipoImp[16];
 
 	int index = findArcadeById(list, len, id);
-	int bufferLibre = buscarArcadeLibre(buffer, len);
+	int bufferLibre = buscarArcadeLibre(list, len);
 
-	if(list!=NULL && len>0 && buffer!=NULL)
+	if(list!=NULL && len>0)
 	{
 		if(index>=0 && list[index].isEmpty==1)
 		{
@@ -146,12 +169,12 @@ int modifyArcadeById(Arcade list[], int len, int id, Arcade buffer[])
 				break;
 
 				case 2:
-					printJuegos(buffer, len);
+					listaJuegos(list, len);
 					if(utn_getText(nombreJuegoAux, len, "\nINGRESE NUEVO JUEGO: ", "ERROR\n")==0)
 					{
 						strncpy(list[index].nombreJuego,nombreJuegoAux,sizeof(list[index].nombreJuego));
-						strncpy(buffer[bufferLibre].nombreJuego,nombreJuegoAux,sizeof(buffer[bufferLibre].nombreJuego));
-						buffer[bufferLibre].isEmpty = 1;
+						strncpy(list[bufferLibre].nombreJuego,nombreJuegoAux,sizeof(list[bufferLibre].nombreJuego));
+						list[bufferLibre].isEmpty = 1;
 						puts("CAMBIO REALIZADO CON EXITO\n");
 					}
 				break;
@@ -174,6 +197,14 @@ int modifyArcadeById(Arcade list[], int len, int id, Arcade buffer[])
 }
 
 //****************************
+
+/** \brief 	Pide los datos para eliminar un Arcade
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * \param	int id recibe el id del arcade a eliminar.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 int removeArcadeById(Arcade list[], int len, int id)
 {
@@ -237,6 +268,14 @@ int removeArcadeById(Arcade list[], int len, int id)
 
 //****************************
 
+/** \brief 	Pide los datos para eliminar un Arcade cuando se da de baja un salon
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * \param	int id recibe el idSalon que concide como campo de las dos esdtructuras.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 int removeArcadeByIdSalon(Arcade list[], int len, int id)
 {
 	int retorno = -1;
@@ -260,6 +299,14 @@ int removeArcadeByIdSalon(Arcade list[], int len, int id)
 
 //****************************
 
+/** \brief 	Busca arcade por ID
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * \param	int id recibe el id del arcade a buscar.
+ * return	Retorna el indice
+ */
+
 int findArcadeById(Arcade list[], int len, int id)
 {
 	int i;
@@ -282,6 +329,15 @@ int findArcadeById(Arcade list[], int len, int id)
 
 //****************************
 
+/** \brief 	Busca arcade por ID de salon
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * \param	int id recibe el id del arcade a buscar.
+ * return	Retorna el indice
+ */
+
+
 int findArcadeByIdSalon(Arcade list[], int len, int id)
 {
 	int i;
@@ -303,6 +359,14 @@ int findArcadeByIdSalon(Arcade list[], int len, int id)
 }
 
 //****************************
+
+/** \brief 	Imprime lista de Arcades
+ *
+ * \param 	Arcade list[] es un puntero al array de arcades.
+ * \param	int len recibe la longitud del array de arcades.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 
 int printArcade(Arcade list[], int len)
 {
@@ -349,26 +413,34 @@ int printArcade(Arcade list[], int len)
 
 //****************************
 
-int Arcade_altaForzada(Arcade* pList, int len,int indice, char nacionalidad[], int tipo, int jugadores, int fichas,char juego[], int *idSalon)
+/** \brief 	Inicializa lista de Arcades
+ *
+ * \param 	Pide todos los parametros que necesita un array de arcades.
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
+
+int Arcade_altaForzada(Arcade* pList, int len, char nacionalidad[], int tipo, int jugadores, int fichas,char juego[], int idSalon)
 {
 	int retorno = -1;
 	int idArcadeAux;
-	int idSalonAux;
+	//int idSalonAux;
+	int indice = buscarArcadeLibre(pList, len);
 
 	idArcadeAux = generadorArcadeID();
-	idSalonAux = generadorSalonID();
+	//idSalonAux = generadorSalonID();
 
 	if(pList != NULL && len>0)
 	{
 		pList[indice].tipo = tipo;
 		pList[indice].idArcade = idArcadeAux;
-		pList[indice].idSalon = idSalonAux;
+		//pList[indice].idSalon = idSalonAux;
+		pList[indice].idSalon = idSalon;
 		pList[indice].jugadores = jugadores;
 		pList[indice].fichasMax = fichas;
 		strncpy(pList[indice].nacionalidad,nacionalidad,sizeof(pList[indice].nacionalidad));
 		strncpy(pList[indice].nombreJuego,juego,sizeof(pList[indice].nombreJuego));
 		pList[indice].isEmpty = 1;
-		*idSalon = pList[indice].idSalon;
 		retorno = 0;
 	}
 
@@ -377,6 +449,13 @@ int Arcade_altaForzada(Arcade* pList, int len,int indice, char nacionalidad[], i
 }
 
 //****************************
+
+/** \brief 	busca lugar libre en array Arcades
+ *
+ * \param 	Arcade list es un punter al array de arcades
+ * \param	len es la longitud del array
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
 
 
 int buscarArcadeLibre(Arcade list[], int len)
@@ -400,6 +479,11 @@ int buscarArcadeLibre(Arcade list[], int len)
 
 //****************************
 
+/** \brief 	Genera un ID consecutivo para array Arcades
+ *
+ */
+
+
 int generadorArcadeID(void)
 {
 	static int contador = 0;
@@ -409,36 +493,58 @@ int generadorArcadeID(void)
 
 //****************************
 
-int listaJuegos(Arcade list[], int len, Arcade buffer[])
+/** \brief 	Imprime lista de Juegos sin repetir Arcades
+ *
+* \param 	Arcade list es un punter al array de arcades
+ * \param	len es la longitud del array
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
+
+int listaJuegos(Arcade list[], int len)
 {
-	int retorno = -1;
+int retorno = -1;
 	int i;
-	int j;
-
-	int indice=buscarArcadeLibre(buffer, len);
-
+	Arcade buffer;
+	int flagSwap;
 	if(list!=NULL && len>0)
 	{
-		for(i=0;i<len-1;i++)
+		do
 		{
-			for(j=1;j<len;j++)
+			flagSwap = 0;
+			for(i=0; i<len-1; i++)
 			{
-				if(strcmp(buffer[i].nombreJuego,list[j].nombreJuego)==0)
+				if(strcmp(list[i].nombreJuego,list[i+1].nombreJuego)>0)
 				{
-					break;
+					flagSwap = 1;
+					buffer=list[i];
+					list[i]=list[i+1];
+					list[i+1]=buffer;
 				}
-				else
-				{
-					strcpy(buffer[indice].nombreJuego,list[i].nombreJuego);
-					buffer[indice].isEmpty=1;
-				}
-			}
+			}//FIN for
+		}while(flagSwap);
+
+		for(i=0;i<len;i++)
+		{
+		    if(strcmp(list[i].nombreJuego,list[i+1].nombreJuego)!=0)
+    		{
+    		    printf("%s\n",list[i].nombreJuego);
+    		}
 		}
+
+		retorno = 0;
 	}
 	return retorno;
 }
-
 //****************************
+
+/** \brief 	Imprime lista de Juegos sin repetir Arcades (ALTERNATIVO)
+ *
+* \param 	Arcade list es un punter al array de arcades
+ * \param	len es la longitud del array
+ * return	retorno = -1 ERROR. retorno = 0 OK.
+ */
+
 
 int printJuegos(Arcade buffer[], int len)
 {
